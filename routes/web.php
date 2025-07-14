@@ -248,7 +248,7 @@ Route::get('/change-password', function () {
     return Inertia::render(
         'ChangePassword'
     );
-})->name('change-password');
+})->name('user.change-password');
 
 Route::get('/cart', function () {
     return Inertia::render(

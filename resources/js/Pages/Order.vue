@@ -52,7 +52,7 @@ import { Link } from "@inertiajs/vue3";
                             <Link
                                 class="link-dark text-decoration-none"
                                 style="font-size: 1.2rem"
-                                href="change-password"
+                                href="user.change-password"
                                 ><i
                                     class="fa-solid fa-gear"
                                     style="color: #63459b"
