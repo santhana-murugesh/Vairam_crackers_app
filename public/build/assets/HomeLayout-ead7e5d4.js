@@ -1,0 +1,1 @@
+import{N as o,F as r}from"./Footer-e0f4a0d5.js";import{d as t,c as s,e as c,a as e,s as l}from"./app-943ba8e2.js";const u={__name:"HomeLayout",setup(n){return(a,m)=>(t(),s("main",null,[c("article",null,[e(o),l(a.$slots,"default"),e(r)])]))}};export{u as _};

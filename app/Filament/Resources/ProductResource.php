@@ -1,0 +1,131 @@
+<?php
+
+namespace App\Filament\Resources;
+
+use App\Filament\Resources\ProductResource\Pages;
+use App\Filament\Resources\ProductResource\RelationManagers;
+use App\Models\Product;
+use Filament\Forms;
+use Closure;
+use Illuminate\Support\Str;
+use Filament\Forms\Form;
+use Filament\Resources\Resource;
+use Filament\Tables\Table;
+use Filament\Tables;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\MultiSelect;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+
+class ProductResource extends Resource
+{
+    protected static ?string $model = Product::class;
+
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $navigationGroup = 'Products';
+
+    protected static ?int $navigationSort = 1;
+
+    
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    public static function form(Form $form): Form
+    {
+        return $form->columns(1)
+                ->schema([
+                    Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
+
+                    Forms\Components\TextInput::make('tamil_name')
+                    ->required()
+                    ->maxLength(255),
+
+                    Forms\Components\TextInput::make('description')->label('unit')
+                    ->required()
+                    ->maxLength(255),
+
+                    // Forms\Components\TextInput::make('url_slug')
+                    // ->maxLength(255),
+
+                    // Forms\Components\TextInput::make('seo_title')
+                    // ->maxLength(255),
+
+                    // RichEditor::make('description'),
+
+                    Select::make('category_id')
+                            ->label('category')
+                            ->relationship('category', 'category')
+                            ->required()
+                            ->preload()
+                            ->searchable(),
+
+                    Forms\Components\TextInput::make('price')
+                        ->required()
+                        ->maxLength(255),
+
+                    FileUpload::make('image')->image(),
+            ]);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                Tables\Columns\ImageColumn::make('image')->searchable()->toggleable()->sortable(),
+                Tables\Columns\TextColumn::make('name')->searchable()->toggleable()->sortable(),
+                Tables\Columns\TextColumn::make('tamil_name')->searchable()->toggleable()->sortable(),
+               
+                // Tables\Columns\TextColumn::make('seo_title')->searchable()->toggleable()->sortable(),
+                // Tables\Columns\TextColumn::make('description')->searchable()->toggleable()->sortable(),
+                Tables\Columns\TextColumn::make('category.category')->searchable()->toggleable()->sortable(),
+                Tables\Columns\TextColumn::make('price')->searchable()->toggleable()->sortable(),
+                Tables\Columns\TextColumn::make('description')->searchable()->toggleable()->sortable(),
+            ])
+            ->reorderable('sort')    
+            ->defaultSort('sort')
+            
+            ->filters([
+                //
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\RestoreAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\RestoreBulkAction::make(),
+            ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+{
+    return parent::getEloquentQuery()
+        ->withoutGlobalScopes([
+            SoftDeletingScope::class,
+        ]);
+}
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListProducts::route('/'),
+            'create' => Pages\CreateProduct::route('/create'),
+            'edit' => Pages\EditProduct::route('/{record}/edit'),
+        ];
+    }
+}

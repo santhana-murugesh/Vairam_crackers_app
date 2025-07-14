@@ -1,0 +1,350 @@
+/* Professional Components CSS */
+/* This file contains professional styling for header and net total components */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* CSS Variables for consistent theming */
+:root {
+    --primary-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    --gold-gradient: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+    --gold-hover-gradient: linear-gradient(45deg, #ffed4e, #ffd700, #ffed4e);
+    --accent-color: #ffd700;
+    --accent-hover: #ffed4e;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --text-muted: #d1d5db;
+    --danger-color: #e03a3c;
+    --success-color: #4ade80;
+    --warning-color: #fbbf24;
+    --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.15);
+    --shadow-heavy: 0 8px 25px rgba(0, 0, 0, 0.2);
+    --border-radius: 8px;
+    --border-radius-lg: 12px;
+    --border-radius-xl: 16px;
+    --transition: all 0.3s ease;
+}
+
+/* Global Professional Styles */
+.professional-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.professional-text-gradient {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.professional-text-shadow {
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.professional-box-shadow {
+    box-shadow: var(--shadow-medium);
+}
+
+.professional-border {
+    border: 2px solid rgba(255, 215, 0, 0.2);
+}
+
+/* Professional Button Styles */
+.professional-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: var(--primary-gradient);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: var(--border-radius-lg);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-light);
+    position: relative;
+    overflow: hidden;
+}
+
+.professional-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.professional-btn:hover::before {
+    left: 100%;
+}
+
+.professional-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-heavy);
+    border-color: rgba(255, 215, 0, 0.5);
+    color: var(--accent-color);
+}
+
+.professional-btn:active {
+    transform: translateY(0);
+}
+
+/* Professional Card Styles */
+.professional-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-xl);
+    padding: 24px;
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+}
+
+.professional-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-heavy);
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+/* Professional Badge Styles */
+.professional-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    background: var(--primary-gradient);
+    color: var(--text-primary);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.professional-badge.success {
+    background: linear-gradient(135deg, #4ade80, #22c55e);
+    color: #ffffff;
+}
+
+.professional-badge.warning {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: #ffffff;
+}
+
+.professional-badge.danger {
+    background: linear-gradient(135deg, #e03a3c, #dc2626);
+    color: #ffffff;
+}
+
+/* Professional Animation Classes */
+.professional-fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.professional-slide-up {
+    animation: slideUp 0.5s ease-out;
+}
+
+.professional-pulse {
+    animation: pulse 2s infinite;
+}
+
+.professional-bounce {
+    animation: bounce 1s infinite;
+}
+
+/* Professional Animation Keyframes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-3px);
+    }
+    60% {
+        transform: translateY(-2px);
+    }
+}
+
+/* Professional Typography */
+.professional-heading {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.professional-heading.large {
+    font-size: 2.5rem;
+}
+
+.professional-heading.medium {
+    font-size: 2rem;
+}
+
+.professional-heading.small {
+    font-size: 1.5rem;
+}
+
+.professional-text {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.professional-text.large {
+    font-size: 1.1rem;
+}
+
+.professional-text.medium {
+    font-size: 1rem;
+}
+
+.professional-text.small {
+    font-size: 0.9rem;
+}
+
+/* Professional Spacing Utilities */
+.professional-mt-1 { margin-top: 0.5rem; }
+.professional-mt-2 { margin-top: 1rem; }
+.professional-mt-3 { margin-top: 1.5rem; }
+.professional-mt-4 { margin-top: 2rem; }
+
+.professional-mb-1 { margin-bottom: 0.5rem; }
+.professional-mb-2 { margin-bottom: 1rem; }
+.professional-mb-3 { margin-bottom: 1.5rem; }
+.professional-mb-4 { margin-bottom: 2rem; }
+
+.professional-p-1 { padding: 0.5rem; }
+.professional-p-2 { padding: 1rem; }
+.professional-p-3 { padding: 1.5rem; }
+.professional-p-4 { padding: 2rem; }
+
+/* Professional Responsive Utilities */
+@media (max-width: 768px) {
+    .professional-container {
+        padding: 0 15px;
+    }
+    
+    .professional-heading.large {
+        font-size: 2rem;
+    }
+    
+    .professional-heading.medium {
+        font-size: 1.5rem;
+    }
+    
+    .professional-heading.small {
+        font-size: 1.25rem;
+    }
+    
+    .professional-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .professional-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .professional-container {
+        padding: 0 12px;
+    }
+    
+    .professional-heading.large {
+        font-size: 1.75rem;
+    }
+    
+    .professional-heading.medium {
+        font-size: 1.25rem;
+    }
+    
+    .professional-heading.small {
+        font-size: 1.1rem;
+    }
+    
+    .professional-btn {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+    
+    .professional-card {
+        padding: 16px;
+    }
+}
+
+/* Professional Focus States */
+.professional-btn:focus,
+.professional-card:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/* Professional Loading States */
+.professional-loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.professional-loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+} 
