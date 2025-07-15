@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Settings\GeneralSettings;
+
 class EmailMiddleware
 {
     /**
@@ -15,7 +15,8 @@ class EmailMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // $email = app(GeneralSettings::class)->email;
+        // Temporarily disabled to fix 500 error
+        // Will be re-enabled after settings are properly configured
         return $next($request);
     }
 }
