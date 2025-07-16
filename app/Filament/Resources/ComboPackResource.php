@@ -45,6 +45,29 @@ class ComboPackResource extends Resource
                 ->maxLength(255),
 
                 FileUpload::make('image')
+                    ->acceptedFileTypes([
+                        'image/jpeg',
+                        'image/jpg', 
+                        'image/png',
+                        'image/gif',
+                        'image/webp',
+                        'image/svg+xml'
+                    ])
+                    ->maxSize(5120)  // 5MB max size
+                    ->imageEditor()
+                    ->imagePreviewHeight('200')
+                    ->loadingIndicatorPosition('center')
+                    ->panelAspectRatio('16:9')
+                    ->panelLayout('integrated')
+                    ->removeUploadedFileButtonPosition('right')
+                    ->uploadButtonPosition('left')
+                    ->uploadProgressIndicatorPosition('left')
+                    ->helperText('Supported formats: JPG, PNG, GIF, WebP, SVG (Max: 5MB)')
+                    ->rules([
+                        'mimes:jpeg,jpg,png,gif,webp,svg',
+                        'max:5120' // 5MB
+                    ])
+                    ->directory('combo-packs')
                 ->required(), // Mark the image field as required
 
             ]);

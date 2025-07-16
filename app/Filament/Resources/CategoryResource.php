@@ -44,8 +44,28 @@ class CategoryResource extends Resource
 
             FileUpload::make('images')
                 ->required()
-                ->acceptedFileTypes(['image/gif'])  // Restrict to GIF format only
-                ->maxSize(2048)  // Optional: Limit file size to 2MB
+                ->acceptedFileTypes([
+                    'image/jpeg',
+                    'image/jpg', 
+                    'image/png',
+                    'image/gif',
+                    'image/webp',
+                    'image/svg+xml'
+                ])
+                ->maxSize(5120)  // 5MB max size
+                ->imageEditor()
+                ->imagePreviewHeight('200')
+                ->loadingIndicatorPosition('center')
+                ->panelAspectRatio('16:9')
+                ->panelLayout('integrated')
+                ->removeUploadedFileButtonPosition('right')
+                ->uploadButtonPosition('left')
+                ->uploadProgressIndicatorPosition('left')
+                ->helperText('Supported formats: JPG, PNG, GIF, WebP, SVG (Max: 5MB)')
+                ->rules([
+                    'mimes:jpeg,jpg,png,gif,webp,svg',
+                    'max:5120' // 5MB
+                ])
         ]);
 }
 

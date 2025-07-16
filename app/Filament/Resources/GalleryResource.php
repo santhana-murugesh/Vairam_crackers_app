@@ -28,7 +28,29 @@ class GalleryResource extends Resource
         return $form
             ->schema([
                 FileUpload::make('image')
-                    ->image()
+                    ->acceptedFileTypes([
+                        'image/jpeg',
+                        'image/jpg', 
+                        'image/png',
+                        'image/gif',
+                        'image/webp',
+                        'image/svg+xml'
+                    ])
+                    ->maxSize(5120)  // 5MB max size
+                    ->imageEditor()
+                    ->imagePreviewHeight('200')
+                    ->loadingIndicatorPosition('center')
+                    ->panelAspectRatio('16:9')
+                    ->panelLayout('integrated')
+                    ->removeUploadedFileButtonPosition('right')
+                    ->uploadButtonPosition('left')
+                    ->uploadProgressIndicatorPosition('left')
+                    ->helperText('Supported formats: JPG, PNG, GIF, WebP, SVG (Max: 5MB)')
+                    ->rules([
+                        'mimes:jpeg,jpg,png,gif,webp,svg',
+                        'max:5120' // 5MB
+                    ])
+                    ->directory('gallery')
                     ->required()
                     ->label('Gallery Image'),
             ]);
