@@ -323,7 +323,7 @@ const netTotal = computed(() => {
         <div class="container mx-auto">
             <div class="marqee mt-2 text-black bg-purple" style="overflow: hidden; white-space: nowrap;">
                 <div class="marquee-content" style="display: inline-block; animation: scroll-left 20s linear infinite;">
-                    To Order Confirm : +91-8248384330,+91-8248384330
+                    To Order Confirm :+91-9677879734
                 </div>
             </div>
         </div>
