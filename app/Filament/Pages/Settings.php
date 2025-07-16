@@ -99,6 +99,89 @@ class Settings extends SettingsPage
                                 ->columnSpan(1),
                         ]),
                 ]),
+            
+            Section::make('Website Branding')
+                ->description('Upload your company logo and favicon')
+                ->icon('heroicon-o-photo')
+                ->collapsible()
+                ->schema([
+                    Grid::make(2)
+                        ->schema([
+                            FileUpload::make('company_logo')
+                                ->label('Company Logo')
+                                ->image()
+                                ->directory('logos')
+                                ->acceptedFileTypes([
+                                    'image/jpeg',
+                                    'image/jpg', 
+                                    'image/png',
+                                    'image/svg+xml',
+                                    'image/webp'
+                                ])
+                                ->maxSize(2048) // 2MB
+                                ->helperText('Upload your company logo (JPG, PNG, SVG, WebP - Max 2MB)')
+                                ->columnSpan(1),
+
+                            FileUpload::make('company_logo_light')
+                                ->label('Light Version Logo')
+                                ->image()
+                                ->directory('logos')
+                                ->acceptedFileTypes([
+                                    'image/jpeg',
+                                    'image/jpg', 
+                                    'image/png',
+                                    'image/svg+xml',
+                                    'image/webp'
+                                ])
+                                ->maxSize(2048) // 2MB
+                                ->helperText('Light version of your logo for dark backgrounds')
+                                ->columnSpan(1),
+                        ]),
+                    
+                    Grid::make(2)
+                        ->schema([
+                            FileUpload::make('favicon')
+                                ->label('Favicon (32x32)')
+                                ->image()
+                                ->directory('favicons')
+                                ->acceptedFileTypes([
+                                    'image/png',
+                                    'image/x-icon',
+                                    'image/svg+xml'
+                                ])
+                                ->maxSize(1024) // 1MB
+                                ->helperText('Upload your favicon (PNG, ICO, SVG - Max 1MB)')
+                                ->columnSpan(1),
+
+                            FileUpload::make('apple_touch_icon')
+                                ->label('Apple Touch Icon (180x180)')
+                                ->image()
+                                ->directory('favicons')
+                                ->acceptedFileTypes([
+                                    'image/png',
+                                    'image/jpeg',
+                                    'image/jpg'
+                                ])
+                                ->maxSize(1024) // 1MB
+                                ->helperText('Icon for Apple devices (PNG, JPG - Max 1MB)')
+                                ->columnSpan(1),
+                        ]),
+                    
+                    Placeholder::make('favicon_info')
+                        ->label('Favicon Information')
+                        ->content('
+                            <div class="text-sm text-gray-600">
+                                <p><strong>Recommended sizes:</strong></p>
+                                <ul class="list-disc list-inside mt-2">
+                                    <li>Favicon: 32x32 pixels (PNG, ICO, or SVG)</li>
+                                    <li>Apple Touch Icon: 180x180 pixels (PNG)</li>
+                                    <li>Logo: 180x60 pixels (PNG, JPG, SVG, or WebP)</li>
+                                </ul>
+                                <p class="mt-2"><strong>Note:</strong> After uploading, clear your browser cache to see the new favicon.</p>
+                            </div>
+                        ')
+                        ->columnSpan(2),
+                ]),
         ]);
     }
 }

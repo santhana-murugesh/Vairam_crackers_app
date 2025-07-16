@@ -7,7 +7,31 @@
 
         <title>{{ config('app.name', ) }} - Buy Best quality fire crackers from Sivakasi</title>
 
-        <link rel="icon" type="image/x-icon" href="image/logo/logo-1.png">
+        @php
+            $settings = app(\App\Settings\GeneralSettings::class);
+        @endphp
+        
+        {{-- Dynamic Favicon --}}
+        @if($settings->getFaviconUrl())
+            <link rel="icon" type="image/x-icon" href="{{ $settings->getFaviconUrl() }}">
+            <link rel="shortcut icon" type="image/x-icon" href="{{ $settings->getFaviconUrl() }}">
+        @else
+            <link rel="icon" type="image/x-icon" href="image/logo/logo-1.png">
+        @endif
+        
+        {{-- Apple Touch Icon --}}
+        @if($settings->getAppleTouchIconUrl())
+            <link rel="apple-touch-icon" sizes="180x180" href="{{ $settings->getAppleTouchIconUrl() }}">
+        @endif
+        
+        {{-- Additional Favicon Sizes --}}
+        @if($settings->favicon_32x32)
+            <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('storage/' . $settings->favicon_32x32) }}">
+        @endif
+        
+        @if($settings->favicon_16x16)
+            <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('storage/' . $settings->favicon_16x16) }}">
+        @endif
         <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="/css/add-cart.css">
         <link rel="stylesheet" href="/css/fontawsome.css">

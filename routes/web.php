@@ -48,6 +48,10 @@ Route::get('/', function (GeneralSettings $settings) {
         'global_discount' => $settings->global_discount,
         'min_order_value' => $settings->min_order_value,
         'delivery_charges'=>$settings->delivery_charges,
+        'favicon' => $settings->getFaviconUrl(),
+        'apple_touch_icon' => $settings->getAppleTouchIconUrl(),
+        'company_logo' => $settings->getCompanyLogoUrl(),
+        'company_logo_light' => $settings->getCompanyLogoLightUrl(),
         
 
 
