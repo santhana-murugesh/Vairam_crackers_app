@@ -13,17 +13,32 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            // Essential seeders that should always run
             AdminUserSeeder::class,
-            // CategorySeeder::class,
-            // ProductSeeder::class,
-            // SliderSeeder::class,
-            // TestimonialSeeder::class,
-            // GallerySeeder::class,
-            // BankAccountSeeder::class,
-            // FeaturedProductSeeder::class,
-            // StateSeeder::class,
-            // Assorted::class,
+            StateSeeder::class,
+            BankAccountSeeder::class,
+            
+            // Content seeders (categories, products, sliders, etc.)
+            CategorySeeder::class,
+            ProductSeeder::class,
+            SliderSeeder::class,
+            TestimonialSeeder::class,
+            GallerySeeder::class,
+            FeaturedProductSeeder::class,
+            Assorted::class,
+            
+            // Optional seeders (uncomment if needed for testing)
             // OrderSeeder::class, // Commented out to avoid test orders
+            // OrderItemsSeeder::class,
+            // PaymentSeeder::class,
+            // AddressSeeder::class,
+            // BillItemSeeder::class,
+            // BillOrderSeeder::class,
+            // ColorSettingsSeeder::class,
+            // CouponSeeder::class,
+            // CustomerSeeder::class,
+            // EnquirySeeder::class,
+            // FAQSeeder::class,
         ]);
 
     }
