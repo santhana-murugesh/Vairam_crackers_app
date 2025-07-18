@@ -188,6 +188,24 @@ const handleImageError = (event) => {
     // Set a fallback image
     event.target.src = '/image/placeholder-slider.jpg';
 };
+
+// Image URL helper method
+const getImageUrl = (imagePath) => {
+    if (!imagePath) return '/image/placeholder-slider.jpg';
+    
+    // Check if it's already a full URL
+    if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+        return imagePath;
+    }
+    
+    // Check if it's already a storage path
+    if (imagePath.startsWith('storage/')) {
+        return '/' + imagePath;
+    }
+    
+    // Add storage prefix if needed
+    return '/storage/' + imagePath;
+};
 const totalPrice = computed(() => store.getters['products/totalPrice']);
 const itemTotalCount = (product_id) => store.getters['products/countByItem'](product_id);
 const itemTotalPrice = (product_id) => store.getters['products/priceByItem'](product_id);
@@ -346,7 +364,7 @@ const netTotal = computed(() => {
                     >
                         <div class="item-image-wrapper">
                             <img
-                                :src="'/storage/' + item.image"
+                                :src="getImageUrl(item.image)"
                                 alt="item image"
                                 class="modern-item-image"
                             />
@@ -449,7 +467,7 @@ const netTotal = computed(() => {
           >
             <div class="slider-background">
               <img 
-                :src="'/storage/' + slider.image" 
+                :src="getImageUrl(slider.image)" 
                 class="slider-bg-image" 
                 :alt="'Slider ' + (index + 1)"
                 @error="handleImageError"
@@ -498,7 +516,7 @@ const netTotal = computed(() => {
               </div>
               <div v-else class="featured-product-image">
                 <img 
-                  :src="'/storage/' + (featuredProduct.image || featuredProduct.product?.image)" 
+                  :src="getImageUrl(featuredProduct.image || featuredProduct.product?.image)" 
                   :alt="featuredProduct.title || featuredProduct.product?.name" 
                   class="featured-image"
                   @error="$event.target.style.display='none'"
@@ -573,7 +591,7 @@ const netTotal = computed(() => {
             @click="navigateToCategory(category.id)"
           >
             <div class="category-image-wrapper">
-              <img :src="'/storage/' + category.images" :alt="category.category" class="category-showcase-image">
+              <img :src="getImageUrl(category.images)" :alt="category.category" class="category-showcase-image">
               <div class="category-overlay">
                 <i class="fas fa-fire category-icon"></i>
               </div>
@@ -669,7 +687,7 @@ const netTotal = computed(() => {
             <p class="testimonial-text">"{{ testimonial.message }}"</p>
           </div>
           <div class="testimonial-author">
-            <img v-if="testimonial.image" :src="'/storage/' + testimonial.image" :alt="testimonial.name" class="author-image">
+                            <img v-if="testimonial.image" :src="getImageUrl(testimonial.image)" :alt="testimonial.name" class="author-image">
             <div class="author-info">
               <h5 class="author-name">{{ testimonial.name }}</h5>
               <p class="author-designation" v-if="testimonial.designation">{{ testimonial.designation }}</p>
@@ -693,7 +711,7 @@ const netTotal = computed(() => {
     <div class="row">
       <div class="col-lg-3 col-md-4 col-sm-6 mb-4" v-for="gallery in galleries.slice(0, 8)" :key="gallery.id">
         <div class="gallery-item">
-          <img :src="'/storage/' + gallery.image" :alt="'Gallery Image ' + gallery.id" class="gallery-image">
+                          <img :src="getImageUrl(gallery.image)" :alt="'Gallery Image ' + gallery.id" class="gallery-image">
           <div class="gallery-overlay">
             <i class="fas fa-expand-alt"></i>
           </div>

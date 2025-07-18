@@ -95,11 +95,53 @@ After uploading a new favicon:
 
 ## Troubleshooting
 
-### Favicon Not Showing
+### Favicon Not Showing on Live Server
+This is the most common issue on shared hosting environments.
+
+#### Quick Fix for Live Server:
+```bash
+# On your live server, run these commands:
+cd /path/to/your/laravel/project
+
+# Create storage directory manually
+mkdir -p public/storage
+
+# Copy files from storage to public
+cp -r storage/app/public/* public/storage/
+
+# Set permissions
+chmod -R 755 public/storage/
+chmod -R 755 storage/
+
+# Clear caches
+php artisan config:clear
+php artisan cache:clear
+```
+
+#### Alternative: Use the Setup Script
+```bash
+# Upload the setup_favicon_live.sh script to your server
+# Then run:
+chmod +x setup_favicon_live.sh
+./setup_favicon_live.sh
+```
+
+#### Check File Structure:
+```bash
+# Verify files exist
+ls -la public/storage/favicons/
+ls -la storage/app/public/favicons/
+
+# Check if storage link exists
+ls -la public/storage
+```
+
+### Favicon Not Showing (General)
 1. Check if the file was uploaded successfully
 2. Verify the file format is supported
-3. Clear browser cache
+3. Clear browser cache (Ctrl+F5 or Cmd+Shift+R)
 4. Check browser developer tools for any errors
+5. Verify the favicon URL is accessible in browser
 
 ### File Upload Issues
 1. Ensure file size is within limits
@@ -107,10 +149,23 @@ After uploading a new favicon:
 3. Verify storage directory permissions
 4. Check Laravel storage link is created
 
-### Storage Link
-If images are not accessible, run:
+### Storage Link Issues
+If `symlink()` is disabled on your hosting:
+
+#### Manual Setup (Recommended for Shared Hosting):
 ```bash
-php artisan storage:link
+# Instead of php artisan storage:link, use:
+mkdir -p public/storage
+cp -r storage/app/public/* public/storage/
+chmod -R 755 public/storage/
+```
+
+#### Update .env File:
+```bash
+# Change this in your .env file:
+FILESYSTEM_DISK=public_direct
+# or
+FILESYSTEM_DISK=shared_hosting
 ```
 
 ## Migration

@@ -149,6 +149,30 @@ const submitForm = () => {
     form.post(route("orders.store"));
 };
 
+// Image URL helper method
+const getImageUrl = (imagePath) => {
+    if (!imagePath) return '/image/placeholder-slider.jpg';
+    
+    // Check if it's already a full URL
+    if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+        return imagePath;
+    }
+    
+    // Check if it's already a storage path
+    if (imagePath.startsWith('storage/')) {
+        return '/' + imagePath;
+    }
+    
+    // Add storage prefix if needed
+    return '/storage/' + imagePath;
+};
+
+// Image error handler
+const handleImageError = (event) => {
+    console.error('Image failed to load:', event.target.src);
+    event.target.src = '/image/placeholder-slider.jpg';
+};
+
 
 
 </script>
@@ -182,33 +206,30 @@ const submitForm = () => {
             
 
             <!-- End Clients Section -->
-            <section class="carousel">
+            <!-- Dynamic Slider Section -->
+            <section class="carousel" v-if="sliders && sliders.length > 0">
                 <div
                     id="carouselExampleControls"
                     class="carousel slide"
                     data-bs-ride="carousel"
                 >
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
+                        <div 
+                            v-for="(slider, index) in sliders" 
+                            :key="slider.id"
+                            class="carousel-item"
+                            :class="{ active: index === 0 }"
+                        >
                             <img
-                                src="image/carousel/carousel-2.png"
+                                :src="getImageUrl(slider.image)"
                                 class="d-block w-100"
-                                alt="..."
+                                :alt="slider.content || 'Slider ' + (index + 1)"
+                                @error="handleImageError"
                             />
-                        </div>
-                        <div class="carousel-item">
-                            <img
-                                src="image/carousel/carousel-1.png"
-                                class="d-block w-100"
-                                alt="..."
-                            />
-                        </div>
-                        <div class="carousel-item">
-                            <img
-                                src="image/carousel/carousel-3.png"
-                                class="d-block w-100"
-                                alt="..."
-                            />
+                            <div class="carousel-caption" v-if="slider.content">
+                                <h5>{{ slider.content }}</h5>
+                                <a v-if="slider.button_text" href="#" class="btn btn-primary">{{ slider.button_text }}</a>
+                            </div>
                         </div>
                     </div>
                     <button

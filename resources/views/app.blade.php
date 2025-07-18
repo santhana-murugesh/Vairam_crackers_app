@@ -5,32 +5,48 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', ) }} - Buy Best quality fire crackers from Sivakasi</title>
+        <title>Rajamani's Pyrotech - Buy Best quality fire crackers from Sivakasi</title>
 
         @php
             $settings = app(\App\Settings\GeneralSettings::class);
         @endphp
         
-        {{-- Dynamic Favicon --}}
-        @if($settings->getFaviconUrl())
-            <link rel="icon" type="image/x-icon" href="{{ $settings->getFaviconUrl() }}">
-            <link rel="shortcut icon" type="image/x-icon" href="{{ $settings->getFaviconUrl() }}">
+        {{-- Dynamic Favicon with Fallback --}}
+        @if($settings->favicon)
+            @php
+                $faviconPath = 'storage/' . $settings->favicon;
+                $faviconUrl = asset($faviconPath);
+            @endphp
+            <link rel="icon" type="image/x-icon" href="{{ $faviconUrl }}">
+            <link rel="shortcut icon" type="image/x-icon" href="{{ $faviconUrl }}">
         @else
             <link rel="icon" type="image/x-icon" href="image/logo/logo-1.png">
         @endif
         
-        {{-- Apple Touch Icon --}}
-        @if($settings->getAppleTouchIconUrl())
-            <link rel="apple-touch-icon" sizes="180x180" href="{{ $settings->getAppleTouchIconUrl() }}">
+        {{-- Apple Touch Icon with Fallback --}}
+        @if($settings->apple_touch_icon)
+            @php
+                $appleIconPath = 'storage/' . $settings->apple_touch_icon;
+                $appleIconUrl = asset($appleIconPath);
+            @endphp
+            <link rel="apple-touch-icon" sizes="180x180" href="{{ $appleIconUrl }}">
         @endif
         
         {{-- Additional Favicon Sizes --}}
         @if($settings->favicon_32x32)
-            <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('storage/' . $settings->favicon_32x32) }}">
+            @php
+                $favicon32Path = 'storage/' . $settings->favicon_32x32;
+                $favicon32Url = asset($favicon32Path);
+            @endphp
+            <link rel="icon" type="image/png" sizes="32x32" href="{{ $favicon32Url }}">
         @endif
         
         @if($settings->favicon_16x16)
-            <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('storage/' . $settings->favicon_16x16) }}">
+            @php
+                $favicon16Path = 'storage/' . $settings->favicon_16x16;
+                $favicon16Url = asset($favicon16Path);
+            @endphp
+            <link rel="icon" type="image/png" sizes="16x16" href="{{ $favicon16Url }}">
         @endif
         <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="/css/add-cart.css">
